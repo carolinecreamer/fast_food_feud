@@ -5,6 +5,7 @@ import Instructions from "./components/Instructions/Instructions.jsx"
 import Chip from "./components/Chip/Chip.jsx"
 import { createDataSet } from "./data/dataset"
 import "./App.css"
+import { useState } from "react"
 
 // don't move this!
 export const appInfo = {
@@ -24,6 +25,9 @@ export const appInfo = {
 const { data, categories, restaurants } = createDataSet()
 
 export function App() {
+  const [category, setCategory] = useState("");
+  const [restaurant, setRestaurant] = useState("");
+
   return (
     <main className="App">
       {/* CATEGORIES COLUMN */}
@@ -32,8 +36,8 @@ export function App() {
           <h2 className="title">Categories</h2>
           {/* YOUR CODE HERE */}
             <ul className="container">
-              {categories.map((category, idx) =>
-                <Chip key={idx} label={category}></Chip>
+              {categories.map((item, idx) =>
+                <Chip key={idx} label={item} isActive={category === item ? true : false} onClick={setCategory}></Chip>
               )}
               </ul>
         </div>
@@ -49,8 +53,8 @@ export function App() {
           <h2 className="title">Restaurants</h2>
           <div className="restaurants options">{/* YOUR CODE HERE */}
           <ul className="categories">
-              {restaurants.map((restaurant, idx) =>
-                <Chip key={idx} label={restaurant}></Chip>
+              {restaurants.map((item, idx) =>
+                <Chip key={idx} label={item} isActive={restaurant === item ? true : false} onClick={setRestaurant}></Chip>
               )}
               </ul>
           </div>
