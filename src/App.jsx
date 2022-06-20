@@ -1,5 +1,8 @@
 import * as React from "react"
 // IMPORT ANY NEEDED COMPONENTS HERE
+import Header from "./components/Header/Header.jsx"
+import Instructions from "./components/Instructions/Instructions.jsx"
+import Chip from "./components/Chip/Chip.jsx"
 import { createDataSet } from "./data/dataset"
 import "./App.css"
 
@@ -28,20 +31,33 @@ export function App() {
         <div className="categories options">
           <h2 className="title">Categories</h2>
           {/* YOUR CODE HERE */}
+            <ul className="container">
+              {categories.map((category, idx) =>
+                <Chip key={idx} label={category}></Chip>
+              )}
+              </ul>
         </div>
       </div>
 
       {/* MAIN COLUMN */}
       <div className="container">
         {/* HEADER GOES HERE */}
+        <Header header={appInfo} />
 
         {/* RESTAURANTS ROW */}
         <div className="RestaurantsRow">
           <h2 className="title">Restaurants</h2>
-          <div className="restaurants options">{/* YOUR CODE HERE */}</div>
+          <div className="restaurants options">{/* YOUR CODE HERE */}
+          <ul className="categories">
+              {restaurants.map((restaurant, idx) =>
+                <Chip key={idx} label={restaurant}></Chip>
+              )}
+              </ul>
+          </div>
         </div>
 
         {/* INSTRUCTIONS GO HERE */}
+        <Instructions instructions={appInfo.instructions}/>
 
         {/* MENU DISPLAY */}
         <div className="MenuDisplay display">
@@ -55,7 +71,7 @@ export function App() {
         </div>
 
         <div className="data-sources">
-          <p>{appInfo.dataSource}</p>
+          <div><p>{appInfo.dataSource}</p></div>
         </div>
       </div>
     </main>
