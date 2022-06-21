@@ -3,6 +3,7 @@ import * as React from "react"
 import Header from "./components/Header/Header.jsx"
 import Instructions from "./components/Instructions/Instructions.jsx"
 import Chip from "./components/Chip/Chip.jsx"
+import NutritionalLabel from "./components/NutritionalLabel/NutritionalLabel.jsx"
 import { createDataSet } from "./data/dataset"
 import "./App.css"
 import { useState } from "react"
@@ -27,16 +28,16 @@ const { data, categories, restaurants } = createDataSet()
 export function App() {
   const [category, setCategory] = useState("");
   const [restaurant, setRestaurant] = useState("");
+  const [selected, setSelected] = useState("");
 
   let currentMenuItems = data.filter((item)=>item.food_category === category && item.restaurant === restaurant)
-
+  let obj = currentMenuItems.find((item)=>item.item_name === selected)
   return (
     <main className="App">
       {/* CATEGORIES COLUMN */}
       <div className="CategoriesColumn col">
         <div className="categories options">
           <h2 className="title">Categories</h2>
-          {/* YOUR CODE HERE */}
             <ul className="container">
               {categories.map((item, idx) =>
                 <Chip key={idx} label={item} isActive={category === item ? true : false} onClick={setCategory}></Chip>
@@ -53,7 +54,7 @@ export function App() {
         {/* RESTAURANTS ROW */}
         <div className="RestaurantsRow">
           <h2 className="title">Restaurants</h2>
-          <div className="restaurants options">{/* YOUR CODE HERE */}
+          <div className="restaurants options">
             <ul className="categories">
               {restaurants.map((item, idx) =>
                 <Chip key={idx} label={item} isActive={restaurant === item ? true : false} onClick={setRestaurant}></Chip>
@@ -69,16 +70,17 @@ export function App() {
         <div className="MenuDisplay display">
           <div className="MenuItemButtons menu-items">
             <h2 className="title">Menu Items</h2>
-            {/* YOUR CODE HERE */}
             <ul className="menu options">
               {currentMenuItems.map((item, idx) =>
-                <Chip key={idx} label={item.item_name}></Chip>
+                <Chip key={idx} label={item.item_name} isActive={selected === item.item_name ? true : false} onClick={setSelected}></Chip>
               )}
             </ul>
           </div>
 
           {/* NUTRITION FACTS */}
-          <div className="NutritionFacts nutrition-facts">{/* YOUR CODE HERE */}</div>
+          <div className="NutritionFacts nutrition-facts">
+            <NutritionalLabel key="nutritionLabel" item={obj}/>
+          </div>
         </div>
 
         <div className="data-sources">
