@@ -28,6 +28,8 @@ export function App() {
   const [category, setCategory] = useState("");
   const [restaurant, setRestaurant] = useState("");
 
+  let currentMenuItems = data.filter((item)=>item.food_category === category && item.restaurant === restaurant)
+
   return (
     <main className="App">
       {/* CATEGORIES COLUMN */}
@@ -52,11 +54,11 @@ export function App() {
         <div className="RestaurantsRow">
           <h2 className="title">Restaurants</h2>
           <div className="restaurants options">{/* YOUR CODE HERE */}
-          <ul className="categories">
+            <ul className="categories">
               {restaurants.map((item, idx) =>
                 <Chip key={idx} label={item} isActive={restaurant === item ? true : false} onClick={setRestaurant}></Chip>
               )}
-              </ul>
+            </ul>
           </div>
         </div>
 
@@ -68,6 +70,11 @@ export function App() {
           <div className="MenuItemButtons menu-items">
             <h2 className="title">Menu Items</h2>
             {/* YOUR CODE HERE */}
+            <ul className="menu options">
+              {currentMenuItems.map((item, idx) =>
+                <Chip key={idx} label={item.item_name}></Chip>
+              )}
+            </ul>
           </div>
 
           {/* NUTRITION FACTS */}
