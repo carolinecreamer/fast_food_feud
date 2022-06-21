@@ -5,8 +5,6 @@ import "./NutritionalLabel.css"
 export function NutritionalLabel(props) {
  
   if (props.item) {
-    console.log(props.item)
-    console.log(nutritionFacts)
     return (
         <div className="nutritional-label">
           <h3 className="title">Nutrition Facts</h3>
@@ -15,7 +13,7 @@ export function NutritionalLabel(props) {
 
           <ul className="fact-list">{
             nutritionFacts.map((item, idx) => {
-              return <NutritionalLabelFact key={item.id} attribute={props.item[item.attribute]} label={item.label}></NutritionalLabelFact>
+              return <NutritionalLabelFact key={dvufrnbvfvhvtuvnukkdtjtkgngfjkfkitem.id} attribute={props.item[item.attribute]} label={item.label}></NutritionalLabelFact>
             })
           }</ul>
         </div>
